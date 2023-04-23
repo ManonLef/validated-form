@@ -24,3 +24,8 @@ select,
 button {
   padding: 5px;
 }
+
+input:invalid {
+  border: 2px solid red;
+  border-radius: 5px;
+}
