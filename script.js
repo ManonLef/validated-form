@@ -23,7 +23,7 @@ mail.addEventListener("input", () => {
     mailError.style.color = "green"
     mailError.className = "error";
   } else {
-    showError("email");
+    showError("email", "minimum 8 characters in a valid email format");
   }
 });
 
@@ -37,6 +37,8 @@ mail.addEventListener("blur", () => {
 // zip validation depends on country selection
 const zip = document.getElementById("zip");
 zip.addEventListener("input", checkZIP)
+const zipError = document.querySelector("#zip + span.error")
+
 
 function checkZIP() {
   const constraints = {
@@ -54,14 +56,13 @@ function checkZIP() {
     ],
     nl: [
       "^(NL-)?\\d{4}\\s*([A-RT-Z][A-Z]|S[BCE-RT-Z])$",
-      "Netherland ZIPs must have exactly 4 digits, followed by 2 letters except SA, SD and SS",
+      "NL ZIPs must have exactly 4 digits, followed by 2 letters except SA, SD and SS",
     ],
   };
 
   const country = document.getElementById("country").value;
   const constraint = new RegExp(constraints[country][0], "")
   const constraintGuide = (constraints[country][1])
-  const zipError = document.querySelector("#zip + span.error")
 
   console.log(constraint)
 
@@ -69,18 +70,20 @@ function checkZIP() {
     zipError.textContent = `✓ ${constraintGuide}`
     zipError.style.color = "green"
   } else {
-    zipError.textContent = constraintGuide
-    zipError.style.color = ""
+    showError("zip", constraintGuide)
   }
 }
 
-
 // multi validation error span message
-function showError(element) {
+function showError(element, message) {
   switch (element) {
     case "email" :
-      mailError.textContent = "minimum 8 characters in a valid email format";
+      mailError.textContent = message;
       mailError.style.color = ""
+      break;
+    case "zip": 
+      zipError.textContent = message;
+      zipError.style.color = ""
       break;
     default :
       break;
