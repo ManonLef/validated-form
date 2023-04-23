@@ -1,23 +1,20 @@
 /* eslint-disable no-use-before-define */
-const form = document.querySelector("form");
 const submit = document.querySelector("button");
-
-submit.addEventListener("click", (event) => {
-  event.preventDefault()
-})
-
-// test function, delete when done
-if (!form.checkValidity()) {
-  const button = document.querySelector("button");
-  button.style.color = "red";
-}
 
 // mail validation
 // minimum 8 characters
 const mail = document.querySelector("#mail");
 const mailError = document.querySelector("#mail + span.error");
 
-mail.addEventListener("input", () => {
+mail.addEventListener("input", checkMail)
+
+mail.addEventListener("blur", () => {
+  if (!mail.checkValidity()) {
+    showError("email", "this is a required field")
+  }
+})
+
+function checkMail() {
   if (mail.checkValidity()) {
     mailError.textContent = "✓ minimum 8 characters in a valid email format";
     mailError.style.color = "green"
@@ -25,13 +22,7 @@ mail.addEventListener("input", () => {
   } else {
     showError("email", "minimum 8 characters in a valid email format");
   }
-});
-
-mail.addEventListener("blur", () => {
-  if (!mail.checkValidity()) {
-    showError("email", "this is a required field")
-  }
-})
+}
 
 // zip validation depends on country selection
 const zip = document.getElementById("zip");
@@ -75,7 +66,7 @@ function checkZIP() {
 
 // multi validation error span message
 function showError(element, message) {
-  switch (element) {
+  switch (element) { 
     case "email" :
       mailError.textContent = message;
       mailError.style.color = ""
@@ -89,3 +80,8 @@ function showError(element, message) {
     }
   }
 
+submit.addEventListener("click", (event) => {
+  event.preventDefault()
+  checkMail()
+  checkZIP()
+})

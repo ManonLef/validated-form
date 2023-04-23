@@ -8,7 +8,8 @@ form {
   width: 50vw;
   display: grid;
   gap: 15px;
-  background-color: rgb(181, 224, 221);
+  background-color: rgb(247, 247, 247);
+  border: 2px solid gray ;
   margin: auto;
   margin-top: 2rem;
   border-radius: 1rem;
