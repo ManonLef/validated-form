@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  padding: 2rem;
+  width: 50vw;
+  display: grid;
+  gap: 15px;
+  background-color: rgb(181, 224, 221);
+  margin: auto;
+  margin-top: 2rem;
+  border-radius: 1rem;
+}
+
+.form {
+  display: grid;
+  gap: 5px;
+}
+
+input,
+select,
+button {
+  padding: 5px;
+}
