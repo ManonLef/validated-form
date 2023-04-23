@@ -9,6 +9,34 @@
   <title>Form Validation</title>
 </head>
 <body>
-  
+  <form novalidate>
+    <div class="form">
+      <label for="mail">mail *</label>
+      <input type="email" name="mail" id="mail">
+      <span class="error-mail"></span>
+    </div>
+    <div class="form">
+      <label for="country">country *</label>
+      <select name="country" id="country">
+        <option value="The Netherlands">The Netherlands</option>
+      </select>
+    </div>
+    <div class="form">
+      <label for="zip">zipcode *</label>
+      <input type="text" name="zip" id="zip">
+      <span class="error-zip"></span>
+    </div>
+    <div class="form">
+      <label for="password">password *</label>
+      <input type="password" name="password" id="password">
+      <span class="error-pw"></span>
+    </div>
+    <div class="form">
+      <label for="password-confirm">confirm password *</label>
+      <input type="password" name="password-confirm" id="password-confirm">
+      <span class="error-pw-confirm"></span>
+    </div>
+    <button type="submit">submit</button>
+  </form>
 </body>
 </html>
