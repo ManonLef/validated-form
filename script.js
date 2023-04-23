@@ -27,12 +27,22 @@ mail.addEventListener("input", () => {
   }
 });
 
+mail.addEventListener("blur", () => {
+  if (!mail.checkValidity()) {
+    mail.style.border = "2px solid red"
+    showError("email")
+  }
+})
+
+
+// multi validation error span message
 function showError(element) {
   switch (element) {
     case "email" :
-      mailError.textContent = "\u00A0 \u00A0 minimum 8 characters in a valid email format";
+      mailError.textContent = "minimum 8 characters in a valid email format";
       break;
     default :
       break;
     }
   }
+
