@@ -24,14 +24,13 @@ select,
 button {
   padding: 5px;
   outline: none;
+  border-radius: 5px;
 }
 
 input:invalid {
   border: 2px solid transparent;
-  border-radius: 5px;
 }
 
 input:valid {
   border: 2px solid green;
-  border-radius: 5px;
 }
