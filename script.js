@@ -29,8 +29,7 @@ mail.addEventListener("input", () => {
 
 mail.addEventListener("blur", () => {
   if (!mail.checkValidity()) {
-    mail.style.border = "2px solid red"
-    showError("email")
+    showError("email", "this is a required field")
   }
 })
 
@@ -67,7 +66,9 @@ function checkZIP() {
   if (constraint.test(zip.value)) {
     zipError.textContent = `✓ ${constraintGuide}`
     zipError.style.color = "green"
+    zip.setCustomValidity("")
   } else {
+    zip.setCustomValidity(constraints[country][0])
     showError("zip", constraintGuide)
   }
 }
