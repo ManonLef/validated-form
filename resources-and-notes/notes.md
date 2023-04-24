@@ -19,14 +19,13 @@
   - [x] How would you set up the different form elements
   - [x] What objects and functions will you need
 - [x] Write the simple form elements
-- [ ] Add the JS code to check validation during form progress
-  - [ ] When user leaves field, validate that field
+- [x] Add the JS code to check validation during form progress
+  - [x] When user leaves field, validate that field
   - [x] email validation
   - [x] zip validation based on country
-  - [ ] pw validation
-  - [ ] confirm password validation
-- [ ] Test all possible cases
-- [ ] Style the form using `:valid` and `:invalid` pseudo-classes
+  - [x] pw validation
+  - [x] confirm password validation
+- [x] Test all possible cases
 
 ## 2023-04-24 notes
 - yesterday I did implement the form fields as thought up in [my planning](./planning.jpeg)
@@ -43,3 +42,10 @@
 - `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,10}/` (Minimum 8 and Maximum 10 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character)
 
 - `/^[a-zA-Z0-9\s]{7,16}$/` (Minimum length 7 and Maximum length 16 Characters allowed [a–z] [A-Z] [0-9])
+
+## 2023-04-24 end of day
+- all validation is there
+- Some things left to do:
+  - [ ] style using `:valid` and `:invalid` (find out if this can be done upon submit only)
+  - [ ] style it a bit less brutalist
+  - [ ] refactor
