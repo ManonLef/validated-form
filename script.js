@@ -123,6 +123,7 @@ function checkPW() {
     console.log("match pattern");
     password.setCustomValidity("");
   }
+  checkPWconfirm()
 }
 
 // confirm email validation
@@ -136,7 +137,7 @@ function checkPWconfirm() {
     pwConfirmError.style.color = "green"
   } else {
     pwConfirm.setCustomValidity((password.value === pwConfirm))
-    showError("confirm", "passwords should match");
+    showError("confirm", "confirm your password");
   }
 }
 
