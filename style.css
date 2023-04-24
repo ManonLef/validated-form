@@ -35,3 +35,7 @@ input:invalid {
 input:valid {
   border: 2px solid green;
 }
+
+span {
+  white-space: pre-line;
+}
