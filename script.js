@@ -65,8 +65,17 @@ function showError(element, message) {
       zipError.textContent = message;
       zipError.style.color = "";
       break;
-    case "pw":
-      pwError.textContent = message;
+    case "pwLength":
+      pwErrorLength.textContent = message;
+      pwErrorLength.style.color = "";
+      break;
+    case "pwNum":
+      pwErrorNum.textContent = message;
+      pwErrorNum.style.color = "";
+      break;
+    case "pwUpper":
+      pwErrorUppercase.textContent = message;
+      pwErrorUppercase.style.color = "";
       break;
     default:
       break;
@@ -76,24 +85,39 @@ function showError(element, message) {
 // password validation
 const password = document.getElementById("password");
 const pwConstraint = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}/;
-const pwError = document.querySelector("#password + span.error");
+const pwErrorLength = document.querySelector("span.error-length");
+const pwLengthConstraint = /[A-Za-z\d]{8,}/;
+const pwErrorUppercase = document.querySelector("span.error-uppercase");
+const pwUpperConstraint = /^(?=.*[A-Z])/;
+const pwErrorNum = document.querySelector("span.error-number");
+const pwNumConstraint = /^(?=.*\d)/;
 
 password.addEventListener("input", validatePassword);
+password.addEventListener("focus", validatePassword);
 
 function validatePassword() {
-  // minimum 8 characters {8,}
-  // minimum 1 uppercase (?=.*[A-Z])
-  // minimum 1 number (?=.*\d)
+  password.setCustomValidity(pwConstraint);
+  if (pwLengthConstraint.test(password.value)) {
+    pwErrorLength.textContent = "✓ minimum of 8 letters or numbers";
+    pwErrorLength.style.color = "green";
+  } else {
+    showError("pwLength", "minimum of 8 letters or numbers");
+  }
+  if (pwNumConstraint.test(password.value)) {
+    pwErrorNum.textContent = "✓ minimum of 1 number";
+    pwErrorNum.style.color = "green";
+  } else {
+    showError("pwNum", "minimum of 1 number");
+  }
+  if (pwUpperConstraint.test(password.value)) {
+    pwErrorUppercase.textContent = "✓ minimum of 1 uppercase letter";
+    pwErrorUppercase.style.color = "green";
+  } else {
+    showError("pwUpper", "minimum of 1 uppercase letter");
+  }
   if (pwConstraint.test(password.value)) {
     console.log("match pattern");
     password.setCustomValidity("");
-  } else {
-    console.log("no match");
-    password.setCustomValidity(pwConstraint);
-    showError(
-      "pw",
-      "minimum 8 characters\r\n minimum 1 uppercase\r\n minimum 1 number"
-    );
   }
 }
 
