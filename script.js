@@ -77,6 +77,10 @@ function showError(element, message) {
       pwErrorUppercase.textContent = message;
       pwErrorUppercase.style.color = "";
       break;
+    case "confirm":
+      pwConfirmError.textContent = message;
+      pwConfirmError.style.color = "";
+      break;
     default:
       break;
   }
@@ -92,10 +96,10 @@ const pwUpperConstraint = /^(?=.*[A-Z])/;
 const pwErrorNum = document.querySelector("span.error-number");
 const pwNumConstraint = /^(?=.*\d)/;
 
-password.addEventListener("input", validatePassword);
-password.addEventListener("focus", validatePassword);
+password.addEventListener("input", checkPW);
+password.addEventListener("focus", checkPW);
 
-function validatePassword() {
+function checkPW() {
   password.setCustomValidity(pwConstraint);
   if (pwLengthConstraint.test(password.value)) {
     pwErrorLength.textContent = "✓ minimum of 8 letters or numbers";
@@ -121,9 +125,28 @@ function validatePassword() {
   }
 }
 
+// confirm email validation
+const pwConfirm = document.getElementById("password-confirm");
+const pwConfirmError = document.querySelector("#password-confirm + span.error");
+
+function checkPWconfirm() {
+  if ((password.value === pwConfirm.value) && (pwConstraint.test(pwConfirm.value))) {
+    pwConfirm.setCustomValidity("");
+    pwConfirmError.textContent = "✓ passwords match";
+    pwConfirmError.style.color = "green"
+  } else {
+    pwConfirm.setCustomValidity((password.value === pwConfirm))
+    showError("confirm", "passwords should match");
+  }
+}
+
+pwConfirm.addEventListener("input", checkPWconfirm);
+
 // submit validation
 submit.addEventListener("click", (event) => {
   event.preventDefault();
   checkMail();
   checkZIP();
+  checkPW();
+  checkPWconfirm();
 });
