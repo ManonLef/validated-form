@@ -49,3 +49,5 @@
   - [ ] style using `:valid` and `:invalid` (find out if this can be done upon submit only)
   - [ ] style it a bit less brutalist
   - [ ] refactor
+  - [ ] validate email min characters with JS
+  - [ ] check to see if `required` validation is expected to be done in JS as well (is this even accessibility friendly?)
