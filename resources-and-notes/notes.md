@@ -51,3 +51,7 @@
   - [ ] refactor
   - [ ] validate email min characters with JS
   - [ ] check to see if `required` validation is expected to be done in JS as well (is this even accessibility friendly?)
+
+  ## 2023-04-27
+  - validation upon submit makes no sense since the form will not submit when invalid. Another option would be on click, but I'll first read through [this article](https://daverupert.com/2017/11/happier-html5-forms/) I found on this to see if it gives me new insights.
+  - the assignment tells you to do all validation through JS. I was looking into email for this but then came across [this regex generator](https://www.html5pattern.com/Emails) site for it that tells you not to use a pattern for email, so I'll leave that to the built-in html type email for now. (note: that site is not very accurate, check postal code for The Netherlands for example which accepts SS etc.)
