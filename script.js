@@ -123,25 +123,33 @@ function checkPW() {
     console.log("match pattern");
     password.setCustomValidity("");
   }
-  checkPWconfirm()
+  checkPWconfirm();
 }
 
 // confirm email validation
 const pwConfirm = document.getElementById("password-confirm");
 const pwConfirmError = document.querySelector("#password-confirm + span.error");
 
-function checkPWconfirm() {
-  if ((password.value === pwConfirm.value) && (pwConstraint.test(pwConfirm.value))) {
+function checkPWconfirm(event) {
+  if (
+    password.value === pwConfirm.value &&
+    pwConstraint.test(pwConfirm.value)
+  ) {
     pwConfirm.setCustomValidity("");
     pwConfirmError.textContent = "✓ passwords match";
-    pwConfirmError.style.color = "green"
+    pwConfirmError.style.color = "green";
   } else {
-    pwConfirm.setCustomValidity((password.value === pwConfirm))
-    showError("confirm", "confirm your password");
+    pwConfirm.setCustomValidity(password.value === pwConfirm);
+    if (event.type === "blur") {
+      showError("confirm", "passwords should match");
+    } else {
+      showError("confirm", "confirm your password");
+    }
   }
 }
 
 pwConfirm.addEventListener("input", checkPWconfirm);
+pwConfirm.addEventListener("blur", checkPWconfirm);
 
 // submit validation
 submit.addEventListener("click", (event) => {
