@@ -4,6 +4,7 @@
 }
 
 form {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   padding: 2rem;
   width: 50vw;
   display: grid;
