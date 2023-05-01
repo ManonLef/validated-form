@@ -10,7 +10,7 @@ form {
   display: grid;
   gap: 15px;
   background-color: rgb(247, 247, 247);
-  border: 2px solid gray ;
+  border: 2px solid rgb(221, 221, 221) ;
   margin: auto;
   margin-top: 2rem;
   border-radius: 1rem;
@@ -27,11 +27,13 @@ button {
   padding: 5px;
   outline: none;
   border-radius: 5px;
+  appearance: none;
+  border: 2px solid rgb(221, 221, 221);
 }
 
-/* input:invalid {
+input.invalid {
   border: 2px solid red;
-} */
+}
 
 input:valid {
   border: 2px solid green;
