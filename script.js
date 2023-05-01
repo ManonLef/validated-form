@@ -11,6 +11,8 @@ mail.addEventListener("input", checkMail);
 mail.addEventListener("blur", () => {
   if (!mail.checkValidity()) {
     showError("email", "this is a required field");
+    mailError.style.color = "red";
+    mail.classList.add("invalid");
   }
 });
 
@@ -27,9 +29,10 @@ function checkMail() {
 // zip validation depends on country selection
 const zip = document.getElementById("zip");
 zip.addEventListener("input", checkZIP);
+zip.addEventListener("blur", checkZIP);
 const zipError = document.querySelector("#zip + span.error");
 
-function checkZIP() {
+function checkZIP(event) {
   const constraints = {
     ch: ["^(CH-)?\\d{4}$", "CH: 4 digits: e.g. CH-1950 or 1950"],
     fr: ["^(F-)?\\d{5}$", "FR: 5 digits: e.g. F-75012 or 75012"],
@@ -51,6 +54,10 @@ function checkZIP() {
   } else {
     zip.setCustomValidity(constraints[country][0]);
     showError("zip", constraintGuide);
+    if (event.type === "blur") {
+      zipError.style.color = "red";
+      zip.classList.add("invalid");
+    }
   }
 }
 
@@ -67,15 +74,12 @@ function showError(element, message) {
       break;
     case "pwLength":
       pwErrorLength.textContent = message;
-      pwErrorLength.style.color = "";
       break;
     case "pwNum":
       pwErrorNum.textContent = message;
-      pwErrorNum.style.color = "";
       break;
     case "pwUpper":
       pwErrorUppercase.textContent = message;
-      pwErrorUppercase.style.color = "";
       break;
     case "confirm":
       pwConfirmError.textContent = message;
@@ -98,26 +102,37 @@ const pwNumConstraint = /^(?=.*\d)/;
 
 password.addEventListener("input", checkPW);
 password.addEventListener("focus", checkPW);
+password.addEventListener("blur", checkPW);
 
-function checkPW() {
+function checkPW(event) {
   password.setCustomValidity(pwConstraint);
   if (pwLengthConstraint.test(password.value)) {
     pwErrorLength.textContent = "✓ minimum of 8 letters or numbers";
     pwErrorLength.style.color = "green";
   } else {
     showError("pwLength", "minimum of 8 letters or numbers");
+    if (event.type === "blur") {
+      pwErrorLength.style.color = "red";
+    }
   }
   if (pwNumConstraint.test(password.value)) {
     pwErrorNum.textContent = "✓ minimum of 1 number";
     pwErrorNum.style.color = "green";
   } else {
     showError("pwNum", "minimum of 1 number");
+    if (event.type === "blur") {
+      pwErrorNum.style.color = "red";
+    }
   }
   if (pwUpperConstraint.test(password.value)) {
     pwErrorUppercase.textContent = "✓ minimum of 1 uppercase letter";
     pwErrorUppercase.style.color = "green";
   } else {
     showError("pwUpper", "minimum of 1 uppercase letter");
+    if (event.type === "blur") {
+      pwErrorUppercase.style.color = "red";
+      password.classList.add("invalid")
+    }
   }
   if (pwConstraint.test(password.value)) {
     console.log("match pattern");
@@ -141,7 +156,9 @@ function checkPWconfirm(event) {
   } else {
     pwConfirm.setCustomValidity(password.value === pwConfirm);
     if (event.type === "blur") {
-      showError("confirm", "passwords should match");
+      showError("confirm", "passwords should match and meet the requirements");
+      pwConfirm.classList.add("invalid")
+      pwConfirmError.style.color = "red";
     } else {
       showError("confirm", "confirm your password");
     }
