@@ -7,22 +7,22 @@ const mail = document.querySelector("#mail");
 const mailError = document.querySelector("#mail + span.error");
 
 mail.addEventListener("input", checkMail);
+mail.addEventListener("blur", checkMail)
 
-mail.addEventListener("blur", () => {
-  if (!mail.checkValidity()) {
-    showError("email", "this is a required field");
-    mailError.style.color = "red";
-    mail.classList.add("invalid");
-  }
-});
-
-function checkMail() {
+function checkMail(event) {
   if (mail.checkValidity()) {
     mailError.textContent = "✓ minimum 8 characters in a valid email format";
     mailError.style.color = "green";
     mailError.className = "error";
   } else {
-    showError("email", "minimum 8 characters in a valid email format");
+    if (event.type === "blur") {
+      showError("email", "this is a required field");
+      mailError.style.color = "red";
+      mail.classList.add("invalid");
+    }
+    if (event.type === "input") {
+      showError("email", "minimum 8 characters in a valid email format");
+    }
   }
 }
 
@@ -131,7 +131,7 @@ function checkPW(event) {
     showError("pwUpper", "minimum of 1 uppercase letter");
     if (event.type === "blur") {
       pwErrorUppercase.style.color = "red";
-      password.classList.add("invalid")
+      password.classList.add("invalid");
     }
   }
   if (pwConstraint.test(password.value)) {
@@ -157,7 +157,7 @@ function checkPWconfirm(event) {
     pwConfirm.setCustomValidity(password.value === pwConfirm);
     if (event.type === "blur") {
       showError("confirm", "passwords should match and meet the requirements");
-      pwConfirm.classList.add("invalid")
+      pwConfirm.classList.add("invalid");
       pwConfirmError.style.color = "red";
     } else {
       showError("confirm", "confirm your password");
