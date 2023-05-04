@@ -14,16 +14,13 @@ function checkMail(event) {
     mailError.textContent = "✓ minimum 8 characters in a valid email format";
     mailError.style.color = "green";
     mailError.className = "error";
-  } else {
-    if (event.type === "blur") {
+  } else if (!event || event.type === "blur") {
       showError("email", "this is a required field");
       mailError.style.color = "red";
       mail.classList.add("invalid");
-    }
-    if (event.type === "input") {
+    } else if (event.type === "input") {
       showError("email", "minimum 8 characters in a valid email format");
     }
-  }
 }
 
 // zip validation depends on country selection
@@ -54,7 +51,7 @@ function checkZIP(event) {
   } else {
     zip.setCustomValidity(constraints[country][0]);
     showError("zip", constraintGuide);
-    if (event.type === "blur") {
+    if (!event || event.type === "blur") {
       zipError.style.color = "red";
       zip.classList.add("invalid");
     }
@@ -111,7 +108,7 @@ function checkPW(event) {
     pwErrorLength.style.color = "green";
   } else {
     showError("pwLength", "minimum of 8 letters or numbers");
-    if (event.type === "blur") {
+    if (!event || event.type === "blur") {
       pwErrorLength.style.color = "red";
     }
   }
@@ -120,7 +117,7 @@ function checkPW(event) {
     pwErrorNum.style.color = "green";
   } else {
     showError("pwNum", "minimum of 1 number");
-    if (event.type === "blur") {
+    if (!event || event.type === "blur") {
       pwErrorNum.style.color = "red";
     }
   }
@@ -129,16 +126,14 @@ function checkPW(event) {
     pwErrorUppercase.style.color = "green";
   } else {
     showError("pwUpper", "minimum of 1 uppercase letter");
-    if (event.type === "blur") {
+    if (!event || event.type === "blur") {
       pwErrorUppercase.style.color = "red";
       password.classList.add("invalid");
     }
   }
   if (pwConstraint.test(password.value)) {
-    console.log("match pattern");
     password.setCustomValidity("");
   }
-  checkPWconfirm();
 }
 
 // confirm email validation
@@ -155,8 +150,8 @@ function checkPWconfirm(event) {
     pwConfirmError.style.color = "green";
   } else {
     pwConfirm.setCustomValidity(password.value === pwConfirm);
-    if (event.type === "blur") {
-      showError("confirm", "passwords should match and meet the requirements");
+    if (!event || event.type === "blur") {
+      showError("confirm", "passwords should match");
       pwConfirm.classList.add("invalid");
       pwConfirmError.style.color = "red";
     } else {
@@ -171,8 +166,12 @@ pwConfirm.addEventListener("blur", checkPWconfirm);
 // submit validation
 submit.addEventListener("click", (event) => {
   event.preventDefault();
-  checkMail();
-  checkZIP();
-  checkPW();
-  checkPWconfirm();
+  console.log(mail.checkValidity())
+  checkMail()
+  console.log(zip.checkValidity())
+    checkZIP()
+  console.log(password.checkValidity())
+  checkPW()
+  console.log(pwConfirm.checkValidity())
+  checkPWconfirm()
 });
