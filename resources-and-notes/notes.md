@@ -58,7 +58,7 @@
 
   ## 2023-05-01
   - validation is a bit better on blur. 
-  - might want to change the behaviour to return to default class on input for outline/border (remove red box) and error text (back to black unless valid)
+  - might want to change the behavior to return to default class on input for outline/border (remove red box) and error text (back to black unless valid)
 
   ## 2023-05-04
   - kids holiday so I'm spending smaller bursts of time on this which isn't optimal.

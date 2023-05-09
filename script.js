@@ -2,12 +2,12 @@
 const submit = document.querySelector("button");
 
 // mail validation
-// minimum 8 characters
+// minimum 8 characters + valid format
 const mail = document.querySelector("#mail");
 const mailError = document.querySelector("#mail + span.error");
 
 mail.addEventListener("input", checkMail);
-mail.addEventListener("blur", checkMail)
+mail.addEventListener("blur", checkMail);
 
 function checkMail(event) {
   if (mail.checkValidity()) {
@@ -15,15 +15,16 @@ function checkMail(event) {
     mailError.style.color = "green";
     mailError.className = "error";
   } else if (!event || event.type === "blur") {
-      showError("email", "this is a required field");
-      mailError.style.color = "red";
-      mail.classList.add("invalid");
-    } else if (event.type === "input") {
-      showError("email", "minimum 8 characters in a valid email format");
-    }
+    showError("email", "this is a required field");
+    mailError.style.color = "red";
+    mail.classList.add("invalid");
+  } else if (event.type === "input") {
+    showError("email", "minimum 8 characters in a valid email format");
+  }
 }
 
 // zip validation depends on country selection
+// use regex for country requirements
 const zip = document.getElementById("zip");
 zip.addEventListener("input", checkZIP);
 zip.addEventListener("blur", checkZIP);
@@ -55,35 +56,6 @@ function checkZIP(event) {
       zipError.style.color = "red";
       zip.classList.add("invalid");
     }
-  }
-}
-
-// multi validation error span message
-function showError(element, message) {
-  switch (element) {
-    case "email":
-      mailError.textContent = message;
-      mailError.style.color = "";
-      break;
-    case "zip":
-      zipError.textContent = message;
-      zipError.style.color = "";
-      break;
-    case "pwLength":
-      pwErrorLength.textContent = message;
-      break;
-    case "pwNum":
-      pwErrorNum.textContent = message;
-      break;
-    case "pwUpper":
-      pwErrorUppercase.textContent = message;
-      break;
-    case "confirm":
-      pwConfirmError.textContent = message;
-      pwConfirmError.style.color = "";
-      break;
-    default:
-      break;
   }
 }
 
@@ -136,7 +108,7 @@ function checkPW(event) {
   }
 }
 
-// confirm email validation
+// confirm password validation
 const pwConfirm = document.getElementById("password-confirm");
 const pwConfirmError = document.querySelector("#password-confirm + span.error");
 
@@ -166,12 +138,41 @@ pwConfirm.addEventListener("blur", checkPWconfirm);
 // submit validation
 submit.addEventListener("click", (event) => {
   event.preventDefault();
-  console.log(mail.checkValidity())
-  checkMail()
-  console.log(zip.checkValidity())
-    checkZIP()
-  console.log(password.checkValidity())
-  checkPW()
-  console.log(pwConfirm.checkValidity())
-  checkPWconfirm()
+  console.log(mail.checkValidity());
+  checkMail();
+  console.log(zip.checkValidity());
+  checkZIP();
+  console.log(password.checkValidity());
+  checkPW();
+  console.log(pwConfirm.checkValidity());
+  checkPWconfirm();
 });
+
+// multi validation error span message
+function showError(element, message) {
+  switch (element) {
+    case "email":
+      mailError.textContent = message;
+      mailError.style.color = "";
+      break;
+    case "zip":
+      zipError.textContent = message;
+      zipError.style.color = "";
+      break;
+    case "pwLength":
+      pwErrorLength.textContent = message;
+      break;
+    case "pwNum":
+      pwErrorNum.textContent = message;
+      break;
+    case "pwUpper":
+      pwErrorUppercase.textContent = message;
+      break;
+    case "confirm":
+      pwConfirmError.textContent = message;
+      pwConfirmError.style.color = "";
+      break;
+    default:
+      break;
+  }
+}
