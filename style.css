@@ -31,7 +31,8 @@ button {
   border: 2px solid rgb(221, 221, 221);
 }
 
-input.invalid {
+/* chained selector to avoid validation upon loading the page */
+input.invalid:invalid {
   border: 2px solid red;
 }
 
@@ -41,4 +42,9 @@ input:valid {
 
 span {
   white-space: pre-line;
+}
+
+button:hover {
+  border: 2px solid gray;
+  background-color: rgb(194, 194, 194);
 }
