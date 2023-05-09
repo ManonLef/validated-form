@@ -63,4 +63,25 @@
   ## 2023-05-04
   - kids holiday so I'm spending smaller bursts of time on this which isn't optimal.
   - [ ] go through the whole code and simplify classes and check for correctness
-  - [ ] validate upon submit as well
+  - [x] validate upon submit as well
+
+  ## 2023-05-09
+  - [ ] allow special characters in the password or change the pw requirement to letters and numbers only. 
+  - the above now is causing issues with Apple default pw generator. Could also be another issue.
+  - [ ] remove the green commentary after wiping input for password and check other fields
+
+  ## Discord question
+
+**Project/Exercise:** JS validated form
+
+**Lesson link:** https://www.theodinproject.com/lessons/node-path-javascript-form-validation-with-javascript
+
+**Code:** https://codepen.io/pen/ or https://github.com/ManonLef/validated-form
+
+**Issue/Problem:** The assignment tells you explicitly to use the `:valid` and `:invalid` pseudoselectors for styling in step 6. However, when doing that it will apply said styling upon loading of the page which I am trying to avoid as to not give a bunch of red errors before users even had a chance to fill it out. I've spent a lot of time not being to aggressive with the validation only to see it go to waste when I style using `:invalid`
+
+**What I expected:** To find a way to disable the pseudoselectors until I tell it to start doing its job again. I don't think this was possible to begin with so I figured out an alternative I'd like opinions on.
+
+**What I've tried:** A lot of silly things. But as far as I know, the invalid and valid pseudoselectors will apply regardless. It's basically a constant boolean. Either an input is valid or it's not. The pseudoclasses themselves can not be turned on or off as far as I know. I did put `novalidate` on the form, but afaik that doesn't take control of the pseudoclasses or the constraint validation API according to this section https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation#validating_forms_using_javascript
+
+So what I did now: I made an `.invalid` class and chained my selectors in css like so: `input.invalid:invalid`, so it will only apply said styling after I add the `invalid` regular class through JS. The only reason I am doing this is because of the exercise explicitly telling me to use those pseudoselectors to be honest. Otherwise I'd just have used `input.invalid` or `.invalid`. Is there anything that I'm missing? For now I feel that using said pseudoselectors as the assignment tells you to will defeat the purpose of the whole dynamic validation we did with JS.
